@@ -1,0 +1,14 @@
+{
+    "name": "F12",
+    "version": "0.0.1",
+    "manifest_version": 3,
+    "description": "开发插件",
+    "homepage_url": "https://github.com/cosy247/F12",
+
+    "action": {
+        "browser_style": true,
+        "default_icon": "icons/icon.png",
+        "default_title": "开发工具插件",
+        "default_popup": "popup/index.html"
+    }
+  }
