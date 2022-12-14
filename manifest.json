@@ -9,6 +9,6 @@
         "browser_style": true,
         "default_icon": "icons/icon.png",
         "default_title": "开发工具插件",
-        "default_popup": "popup/index.html"
+        "default_popup": "./public/icons/icon.png"
     }
   }
