@@ -1,0 +1,16 @@
+<app-root>
+    <h1>{@ name}1</h1>
+    <h1>{name}</h1>
+</app-root>
+
+<script>
+    return {
+        name: '<p>123</p>'
+    }
+</script>
+
+<style>
+    h1 {
+        background-color: aqua;
+    }
+</style>

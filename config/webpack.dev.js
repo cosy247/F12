@@ -1,29 +1,43 @@
 const ESLintWebpackPlugin = require('eslint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { resolve } = require('path');
 
 module.exports = {
     entry: './src/index.js',
+    resolveLoader: {
+        modules: ['node_modules', 'setor'],
+    },
+    resolve: {
+        extensions: ['.js', '.setor', '.json'],
+        alias: {
+            setor: resolve('./setor'),
+        },
+    },
     module: {
         rules: [
             {
+                test: /\.setor$/,
+                use: ['setor-loader'],
+            },
+            {
                 test: /\.html$/,
-                loader: 'html-loader',
+                use: ['html-loader'],
             },
             {
                 test: /\.css$/,
-                use: ['css-loader'],
+                use: ['raw-loader'],
             },
             {
                 test: /\.less$/,
-                use: ['style-loader', 'css-loader', 'less-loader'],
+                use: ['raw-loader', 'less-loader'],
             },
             {
                 test: /\.s[ac]ss$/,
-                use: ['style-loader', 'css-loader', 'less-loader'],
+                use: ['raw-loader', 'less-loader'],
             },
             {
                 test: /\.styl$/,
-                use: ['style-loader', 'css-loader', 'stylus-loader'],
+                use: ['raw-loader', 'stylus-loader'],
             },
             {
                 test: /\.(jpe?g|png|gif|webp|svg)$/,
