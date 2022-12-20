@@ -1,37 +1,49 @@
-
 const ESLintWebpackPlugin = require('eslint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const path = require('path');
+const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
+const { resolve } = require('path');
 
 module.exports = {
-    entry: './src/main.js',
+    entry: './src/index.js',
     output: {
-        path: path.resolve(__dirname, '../build'),
-        filename: './build/js/main.js',
+        path: resolve('build'),
+        filename: './js/index.js',
         clean: true,
+    },
+    resolveLoader: {
+        modules: ['node_modules', 'setor'],
+    },
+    resolve: {
+        extensions: ['.js', '.setor', '.json'],
+        alias: {
+            setor: resolve('./setor'),
+        },
     },
     module: {
         rules: [
             {
                 test: /\.setor$/,
-                use: ['../../loader.js'],
+                use: ['setor-loader'],
+            },
+            {
+                test: /\.html$/,
+                use: ['html-loader'],
             },
             {
                 test: /\.css$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader'],
+                use: ['raw-loader'],
             },
             {
                 test: /\.less$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader'],
+                use: ['raw-loader', 'less-loader'],
             },
             {
                 test: /\.s[ac]ss$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader'],
+                use: ['raw-loader', 'less-loader'],
             },
             {
                 test: /\.styl$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader', 'stylus-loader'],
+                use: ['raw-loader', 'stylus-loader'],
             },
             {
                 test: /\.(jpe?g|png|gif|webp|svg)$/,
@@ -61,14 +73,12 @@ module.exports = {
     },
     plugins: [
         new ESLintWebpackPlugin({
-            context: path.resolve(__dirname, '../src'),
+            context: './src',
         }),
         new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, '../public/index.html'),
+            template: './public/index.html',
         }),
-        new MiniCssExtractPlugin({
-            filename: './public/css/main.css',
-        }),
+        new NodePolyfillPlugin(),
     ],
     mode: 'production',
 };

@@ -1,12 +1,15 @@
 <app-root>
-    <h1>{@ name}1</h1>
-    <h1>{name}</h1>
+    <h1>{name}1</h1>
+    <h1>{style}</h1>
 </app-root>
 
 <script>
+    import style from './index.css';
+
     return {
-        name: '<p>123</p>'
-    }
+        name: '<p>123</p>',
+        style,
+    };
 </script>
 
 <style>
