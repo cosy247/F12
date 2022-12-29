@@ -1,0 +1,10 @@
+<app-router:div>
+    router
+</app-router:div>
+
+<script>
+    console.log(123);
+</script>
+
+<style>
+</style>

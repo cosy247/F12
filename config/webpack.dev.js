@@ -1,6 +1,4 @@
-const ESLintWebpackPlugin = require('eslint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 const { resolve } = require('path');
 
 module.exports = {
@@ -67,13 +65,9 @@ module.exports = {
         ],
     },
     plugins: [
-        new ESLintWebpackPlugin({
-            context: './src',
-        }),
         new HtmlWebpackPlugin({
             template: './public/index.html',
         }),
-        new NodePolyfillPlugin(),
     ],
     devServer: {
         host: 'localhost',
