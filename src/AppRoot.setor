@@ -1,17 +1,15 @@
 <app-root:div class="root">
     <h1 class="logo">{logos.current}</h1>
     <div class="line"></div>
-    <a :href="link" class="title">{title}</a>
+    <a href="link" class="title">title</a>
     <app-router path="router" component="app-router"/>
 </app-root:div>
 
 <script>
-    import { bind, store } from 'setor';
+    import { bind } from 'setor';
     import './components/AppRouter.setor'
 
-    const {link, title} = store;
-
-    const logos = bind({
+    const logos = this.logos = bind({
         cont: ['🥪', '🍧', '🍰', '🍟', '🌮', '🥠', '🍚', '🍜', '🍨', '🥧'],
         index: 0,
         get current() {
@@ -25,12 +23,6 @@
             logos.index = 0;
         }
     }, 5000);
-
-    return {
-        logos,
-        link,
-        title,
-    };
 </script>
 
 <style>

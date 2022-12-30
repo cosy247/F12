@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+s<!DOCTYPE html>
 <html lang="ch-zn">
     <head>
         <meta charset="UTF-8" />
@@ -13,32 +13,6 @@
             <a :href="link" class="title">{Setor}</a>
             <app-router path="router" component="app-router" />
         </div>
-
-        <script>
-            import { bind, store } from 'setor';
-            import './components/AppRouter.setor';
-
-            const logos = bind({
-                cont: ['🥪', '🍧', '🍰', '🍟', '🌮', '🥠', '🍚', '🍜', '🍨', '🥧'],
-                index: 0,
-                get current() {
-                    return logos.cont[logos.index];
-                },
-            });
-
-            setInterval(() => {
-                logos.index++;
-                if (logos.index === logos.cont.length) {
-                    logos.index = 0;
-                }
-            }, 5000);
-
-            return {
-                logos,
-                link: store.link,
-                title: store.title,
-            };
-        </script>
 
         <style>
             * {
@@ -85,98 +59,123 @@
         </style>
     </body>
     <script>
-        const sourse = `<app-root:div class="root">
-            <h1 class="logo">🥪</h1>
-            <div class="line"></div>
-            <a :href="link" class="title">About Setor</a>
-            <app-router path="router" component="app-router" />
-        </app-root:div>
-        <script>
-    import { bind, store } from 'setor';
-    import './components/AppRouter.setor'
-            const logos = ({
-                cont: ['🥪', '🍧', '🍰', '🍟', '🌮', '🥠', '🍚', '🍜', '🍨', '🥧'],
-                index: 0,
-                get current() {
-                    return logos.cont[logos.index];
-                },
-            });
+        const source  = `<app-root:div class="root">
+    <h1 class="logo">{logos.current}</h1>
+    <div class="line"></div>
+    <a :href="link" class="title">{title}</a>
+    <app-router path="router" component="app-router"/>
+</app-root:div>
 
-            setInterval(() => {
-                logos.index++;
-                if (logos.index === logos.cont.length) {
-                    logos.index = 0;
-                }
-            }, 5000);
-        <\/script>
-        <style>
-            * {
-                padding: 0;
-                margin: 0;
-            }
-            .logo {
-                position: relative;
-                font-size: 20vmin;
-                pointer-events: none;
-                user-select: none;
-            }
-            .line {
-                width: 0;
-                height: 1vmin;
-                border-right: 20vmin solid #0000;
-                border-left: 0vmin solid #789;
-                animation: line 5s linear infinite;
-            }
-            @keyframes line {
-                100% {
-                    border-right: 0 solid #789;
-                    border-left: 20vmin solid #0000;
-                }
-            }
-        </style>`;
+<script clasdf=''>
+    import { bind, store } from 'setor';
+    import { store } from 'setor/store';
+    import './components/AppRouter.setor'
+
+    const {link, title} = store;
+
+    const logos = this.logs = bind({
+        cont: ['🥪', '🍧', '🍰', '🍟', '🌮', '🥠', '🍚', '🍜', '🍨', '🥧'],
+        index: 0,
+        get current() {
+            return logos.cont[logos.index]
+        }
+    });
+
+    setInterval(() => {
+        logos.index++;
+        if(logos.index === logos.cont.length) {
+            logos.index = 0;
+        }
+    }, 5000);
+<\/script>
+
+<style>
+    .root {
+        width: 100%;
+        height: 100vh;
+        background-color: #345;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    .logo {
+        position: relative;
+        font-size: 20vmin;
+        pointer-events: none;
+        user-select: none;
+    }
+    .line {
+        width: 0;
+        height: 1vmin;
+        border-right: 20vmin solid #0000;
+        border-left: 0vmin solid #789;
+        animation: line 5s linear infinite;
+    }
+    @keyframes line {
+        100% {
+            border-right: 0 solid #789;
+            border-left: 20vmin solid #0000;
+        }
+    }
+    .title {
+        color: #eee;
+        font-size: 5vmin;
+        text-decoration: none;
+        transition: letter-spacing 0.5s;
+    }
+    .title:hover {
+        letter-spacing: 0.05em;
+    }
+</style>
+`;
 
         const tags = [];
-        const tagStrings = sourse.match(/<(.*?)( (.|\n)*?|\n(.|\n)*?)?>(.|\n)*?<\/\1>/g);
+    {
+        const tagStrings = source.match(/<\s?(.*?)\b[^>]*>[\s\S]*<\/\1>/g);
+        console.log(tagStrings);
         tagStrings.forEach((tagString) => {
             tags.push({
-                tagName: tagString.match(/<.*?>/)[0].slice(1, -1).trim().split(' ')[0],
+                tagName: tagString.match(/<.*?>/)[0].slice(1, -1).trim()
+                    .split(' ')[0],
                 outerHTML: tagString,
             });
         });
+    }
 
-        let name = '';
-        let html = '';
-        let dataFunBody = '';
+    let name = '';
+    let html = '';
+    let dataFunBody = '';
 
-        // 遍历子节点查找对应节点
-        tags.forEach((tag) => {
-            const { tagName, outerHTML } = tag;
+    // 遍历子节点查找对应节点
+    tags.forEach((tag) => {
+        const { tagName, outerHTML } = tag;
+        if (tagName.toUpperCase() === 'SCRIPT'){
+            dataFunBody = outerHTML.replace(/^<\s?script\s?>/, '').replace(/<\s?\/\s?script\s?>$/, '')
+                .trim();
+        } else if (tagName.toUpperCase() === 'STYLE'){
+            html += `\n${outerHTML.replaceAll('\n', '').replace(/\s+/g, ' ')}`;
+        } else if (tagName.indexOf('-') > 0){
+            const nameSplit = tagName.split(':');
+            const rootTagName = nameSplit[1] || 'div';
+            [name] = nameSplit;
+            html += outerHTML
+                .replace(new RegExp(`^<\\s?${tagName}`), `<${rootTagName}`)
+                .replace(new RegExp(`${tagName}\\s?>$`), `${rootTagName}>`);
+        }
+    });
 
-            if (tagName.toUpperCase() === 'SCRIPT') {
-                dataFunBody = outerHTML.replace(/^<\s?script\s?>/, '').replace(/<\s?\/\s?script\s?>$/, '').trim();
-            } else if (tagName.toUpperCase() === 'STYLE') {
-                html += '\n' + outerHTML.replaceAll('\n', '').replace(/\s+/g, ' ');
-            } else if (tagName.indexOf('-') > 0) {
-                const nameSplit = tagName.split(':');
-                const rootTagName = nameSplit[1] || 'div';
-                [name] = nameSplit;
-                html += outerHTML
-                    .replace(new RegExp(`^<\\s?${tagName}`), `<${rootTagName}`)
-                    .replace(new RegExp(`${tagName}\\s?>$`), `${rootTagName}>`);
-            }
-        });
+    // 提取script中import语句
+    const imports = dataFunBody.match(/import .*?(['"`]).*?\1;?/gm);
+    imports && imports.forEach((im) => {
+        dataFunBody = dataFunBody.replaceAll(im, '');
+    });
+    dataFunBody = dataFunBody.trim();
 
-        // 提取script中import语句
-        const imports = dataFunBody.match(/import .*?(['"`]).*?\1;?/gm);
-        let matchdataFunBody = dataFunBody;
-        imports && imports.forEach((im) => {
-                matchdataFunBody = matchdataFunBody.replaceAll(im, '');
-        });
-        matchdataFunBody = matchdataFunBody.trim();
-
+    console.log(tags);
         console.log(name);
         console.log(html);
-        console.log(matchdataFunBody);
+        console.log(dataFunBody);
         console.log(imports);
-    </script>
+        </script>
 </html>

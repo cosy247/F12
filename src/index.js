@@ -1,4 +1,5 @@
-import { render, setStore } from 'setor';
+import { render } from 'setor';
+import { setStore } from 'setor/store';
 import style from './index.css';
 import './AppRoot.setor';
 
