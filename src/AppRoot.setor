@@ -9,6 +9,8 @@
     import { bind, store } from 'setor';
     import './components/AppRouter.setor'
 
+    const {link, title} = store;
+
     const logos = bind({
         cont: ['🥪', '🍧', '🍰', '🍟', '🌮', '🥠', '🍚', '🍜', '🍨', '🥧'],
         index: 0,
@@ -26,8 +28,8 @@
 
     return {
         logos,
-        link: store.link,
-        title: store.title,
+        link,
+        title,
     };
 </script>
 
