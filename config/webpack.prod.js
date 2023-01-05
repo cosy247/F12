@@ -72,9 +72,6 @@ module.exports = {
         ],
     },
     plugins: [
-        new ESLintWebpackPlugin({
-            context: './src',
-        }),
         new HtmlWebpackPlugin({
             template: './public/index.html',
         }),

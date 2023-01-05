@@ -9,7 +9,7 @@
     import { bind } from 'setor';
     import './components/AppRouter.setor'
 
-    const logos = this.logos = bind({
+    const logos = bind({
         cont: ['🥪', '🍧', '🍰', '🍟', '🌮', '🥠', '🍚', '🍜', '🍨', '🥧'],
         index: 0,
         get current() {
@@ -23,6 +23,10 @@
             logos.index = 0;
         }
     }, 5000);
+
+    return {
+        logos
+    }
 </script>
 
 <style>
