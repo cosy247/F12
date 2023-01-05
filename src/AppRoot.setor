@@ -2,31 +2,31 @@
     <h1 class="logo">{logos.current}</h1>
     <div class="line"></div>
     <a href="link" class="title">title</a>
-    <app-router path="router" component="app-router"/>
+    <app-router path="router" component="app-demo"></app-router>
 </app-root:div>
 
 <script>
-    import { bind } from 'setor';
-    import './components/AppRouter.setor'
+    import { bind, getProps } from 'setor';
+    import './components/AppDemo.setor';
 
     const logos = bind({
         cont: ['🥪', '🍧', '🍰', '🍟', '🌮', '🥠', '🍚', '🍜', '🍨', '🥧'],
         index: 0,
         get current() {
-            return logos.cont[logos.index]
-        }
+            return logos.cont[logos.index];
+        },
     });
 
     setInterval(() => {
         logos.index++;
-        if(logos.index === logos.cont.length) {
+        if (logos.index === logos.cont.length) {
             logos.index = 0;
         }
     }, 5000);
 
     return {
-        logos
-    }
+        logos,
+    };
 </script>
 
 <style>
