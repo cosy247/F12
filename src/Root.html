@@ -1,29 +1,8 @@
-<app-root:div class="root">
+<div class="root">
     <h1 class="logo">{logos.current}</h1>
     <div class="line"></div>
     <a href="link" class="title">title</a>
-    <app-router path="router" component="app-router"/>
-</app-root:div>
-
-<script>
-    import { bind } from 'setor';
-    import './components/AppRouter.setor'
-
-    const logos = bind({
-        cont: ['🥪', '🍧', '🍰', '🍟', '🌮', '🥠', '🍚', '🍜', '🍨', '🥧'],
-        index: 0,
-        get current() {
-            return logos.cont[logos.index]
-        }
-    });
-
-    setInterval(() => {
-        logos.index++;
-        if(logos.index === logos.cont.length) {
-            logos.index = 0;
-        }
-    }, 5000);
-</script>
+</div>
 
 <style>
     .root {
