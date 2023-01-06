@@ -1,6 +1,6 @@
-<app-router:div>
-    router
-</app-router:div>
+<app-demo:div>
+    Demo
+</app-demo:div>
 
 <script>
     console.log(123);
