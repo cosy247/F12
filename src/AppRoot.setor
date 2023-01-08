@@ -6,10 +6,14 @@
 </app-root:div>
 
 <script>
-    import { bind, getProps } from 'setor';
+    import { bind, getProps, getData } from 'setor';
     import './components/AppDemo.setor';
 
-    const logos = bind({
+    const store = getStore();
+    const props = getProps();
+    const data = getData();
+
+    const logos = data.logos = bind({
         cont: ['🥪', '🍧', '🍰', '🍟', '🌮', '🥠', '🍚', '🍜', '🍨', '🥧'],
         index: 0,
         get current() {
