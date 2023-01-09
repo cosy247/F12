@@ -9,6 +9,8 @@
     import { bind, getProps } from 'setor';
     import './components/AppDemo.setor';
 
+    props.asdf = 123;
+
     const logos = bind({
         cont: ['🥪', '🍧', '🍰', '🍟', '🌮', '🥠', '🍚', '🍜', '🍨', '🥧'],
         index: 0,
