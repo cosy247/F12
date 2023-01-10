@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sess</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            font-size: 50px;
+            background: linear-gradient(30deg, rgb(156, 224, 220), #84e);
+        }
+    </style>
+</head>
+
+<body>
+    <p>switch</p>
+    <input class="input" sess="switch" type="checkbox" name="" id=""/>
+    <style>
+        [sess='switch'] {
+            font-size: inherit;
+            appearance: none;
+            width: 2.5em;
+            height: 1em;
+            background-color: #bbb;
+            border-radius: 1em;
+            background-image: radial-gradient(circle, white, white 50%, #9999 55%, #0000 70%);
+            background-size: 1em;
+            background-repeat: no-repeat;
+            background-position: top left;
+            border: 2px solid #888;
+            box-shadow: 0 0 0 0px #406fa1;
+            transition: background 0.4s;
+        }
+        [sess='switch']:checked {
+            background-position: top right;
+            background-color: #5454dd;
+            box-shadow: 0 0 0 0.2em #406fa100;
+            transition: 0.4s;
+            transition-delay: box-shadow 0.2s;
+        }
+    </style>
+</body>
+
+</html>
