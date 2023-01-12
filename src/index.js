@@ -1,15 +1,7 @@
-import { render } from 'setor';
-import { setStore } from 'setor/store';
-import style from './index.css';
+import { createRoot } from 'setor';
 import './AppRoot.setor';
 
-setStore({
-    link: 'https://github.com/cosy247/setor',
-    title: 'About Setor',
-});
-
-render({
+createRoot({
     root: '#root',
     component: 'app-root',
-    style,
 });
